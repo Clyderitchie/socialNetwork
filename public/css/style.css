@@ -1,0 +1,7 @@
+h2 {
+    font-size: medium;
+};
+
+.container {
+    outline: 3px solid red;
+}
