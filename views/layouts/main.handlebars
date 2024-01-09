@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clyde Ritchie</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="bg-dark p-3">
+
+    <header class="bg-dark border border-bottom">
+        <div id="navBar" class="container" class="bg-dark">
+            <nav class="navbar navbar-expand-lg bg-dark">
+                <div class="container-fluid">
+                    <h1 class="bolder">
+                        <a class="text-decoration-none text-light" href="#">
+                            Clyde Ritchie
+                        </a>
+                    </h1>
+                    <div id="navDropdown" class="btn-group" role="group">
+                        <button type="button" class="btn bg-dark btn-light dropdown-toggle text-light" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Explore
+                        </button>
+                        <ul class="dropdown-menu bg-dark">
+                            <li><a class="dropdown-item text-light" href="#">Games</a></li>
+                            <li><a class="dropdown-item text-light" href="#">Projects</a></li>
+                            <li><a class="dropdown-item text-light" href="#">Contact</a></li>
+                            <li><a class="dropdown-item text-light" href="#">Resume</a></li>
+                            <li><a class="dropdown-item text-light" href="#">Admin</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container mt-5">
+            {{{body}}}
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
