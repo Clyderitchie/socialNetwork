@@ -1,68 +1,43 @@
-const { Model, DataTypes, DATE } = require('sequelize');
-const bcrypt = require('bcrypt');
-const sequelize = require('../config/connection');
+const { Schema, model } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 
-class Users extends Model {
-    checkPassword(loginPw) {
-        return bcrypt.compareSync(loginPw, this.password);
-    }
-};
-
-Users.init(
+const UserSchema = new Schema(
     {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            allowNull: false,
-            autoIncrement: true
-        },
         username: {
-            type: DataTypes.STRING,
+            type: String,
             unique: true,
-            allowNull: false,
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [8]
-            },
+            trim: true,
+            required: 'A username is required for all users',
         },
         email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                isEmail: true
-            },
+            type: String,
+            require: 'A email is required to signup',
+            match: [/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+            'This is not a valid email']
         },
+        name: {
+            type: String,
+            unique: false,
+            required: 'Please enter your first and last name please'
+        },
+        birthday: {
+            type: Date,
+            default: Date.now,
+            get: (timestamp) => dateFormat(timestamp),
+        },
+        dateCreated: {
+            type: Date,
+            default: Date.now,
+            get: (timestamp) => dateFormat(timestamp),
+        }
     },
     {
-        hooks: {
-            beforeCreate: async (newTellerData) => {
-                try {
-                    newTellerData.password = await bcrypt.hash(newTellerData.password, 10);
-                    return newTellerData;
-                } catch (err) {
-                    console.log(err.message)
-                    throw err
-                }
-            },
-            beforeUpdate: async (updatedTellerData) => {
-                try {
-                    updatedTellerData.password = await bcrypt.hash(updatedTellerData.password, 10);
-                    return updatedTellerData;
-                } catch (err) {
-                    console.log(err.message)
-                    throw err
-                }
-            },
-        },
-        sequelize,
-        timestamps: false,
-        freezeTableName: true,
-        underscored: false,
-        modelName: 'users',
+        toJSON:{},
+        id: false,
+        autoIndex: false
     }
 );
 
-module.exports = Users
+const User = model('User', UserSchema);
+
+module.exports = User;

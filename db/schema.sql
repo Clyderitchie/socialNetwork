@@ -1,3 +1,0 @@
-DROP DATABASE IF EXISTS socialNetwork_db;
-
-CREATE DATABASE IF NOT EXISTS socialNetwork_db;

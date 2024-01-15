@@ -1,8 +1,3 @@
-const Admin = require('./admin');
-const Users = require('./user');
+const User = require('./user');
 
-
-
-
-
-module.exports = { Admin, Users };
+module.exports = { User };
