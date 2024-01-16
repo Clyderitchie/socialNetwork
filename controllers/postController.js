@@ -69,5 +69,42 @@ module.exports = {
             console.log(err);
             res.status(500).json(err.message);
         }
+    },
+    // Add a new comment
+    async addComment(req, res){
+        try {
+            const newComment = await Post.findOneAndUpdate(
+                { _id: req.params.postId },
+                { $addToSet: { comment: req.body } },
+                { new: true, runValidators: true },
+            );
+
+            if(!newComment){
+                res.json({ message: 'No post with this ID was found!' });
+            }
+
+            res.json(newComment)
+        } catch (err) {
+            console.log(err);
+            res.status(500).json(err.message);
+        }
+    },
+    // Remove a comment
+    async removeComment(req, res){
+        try {
+            const removeComment = await Post.findOneAndUpdate(
+                { _id: req.params.id },
+                { $pull: { comments: { commentId: req.params.commentId } } },
+            );
+
+            if(!removeComment){
+                res.json({ message: 'Could not locate a comment by that ID.' });
+            }
+
+            res.json(removeComment);
+        } catch (err) {
+            console.log(err);
+            res.status(500).json(err.message);
+        }
     }
 }
