@@ -10,13 +10,13 @@ const {
 
 // /api/users
 router.route('/')
-    .get(getAllUsers)
-    .post(createUser);
+    .get(getAllUsers) // (Working)
+    .post(createUser); // (Working)
 
 // /api/users/:id
 router.route('/:id')
-    .get(getUserById)
-    .put(updateUser)
-    .delete(deleteUser);
+    .get(getUserById) // (Working) 
+    .put(updateUser) // (Working)
+    .delete(deleteUser); // (Working)
 
 module.exports = router
